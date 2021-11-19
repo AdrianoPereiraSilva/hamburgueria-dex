@@ -1,0 +1,13 @@
+hamburgueria-dex-backend/.metadata/
+
+hamburgueria-dex-backend/target/
+
+hamburgueria-dex-backend/.classpath
+hamburgueria-dex-backend/.springBeans
+hamburgueria-dex-backend/.project
+hamburgueria-dex-backend/.settings/
+hamburgueria-dex-backend/.gradle/
+hamburgueria-dex-backend/build/
+hamburgueria-dex-backend/.idea/
+
+.idea/
