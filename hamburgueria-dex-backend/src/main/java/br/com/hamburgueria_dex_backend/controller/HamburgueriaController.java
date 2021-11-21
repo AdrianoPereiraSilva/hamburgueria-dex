@@ -1,9 +1,9 @@
 package br.com.hamburgueria_dex_backend.controller;
 
-import br.com.hamburgueria_dex_backend.dto.LancheResponseDTO;
+import br.com.hamburgueria_dex_backend.dto.CardapioResponseDTO;
+import br.com.hamburgueria_dex_backend.dto.IngredienteResponseDTO;
 import br.com.hamburgueria_dex_backend.service.HamburgueriaService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,11 +16,16 @@ import java.util.List;
 @AllArgsConstructor
 public class HamburgueriaController {
 
-    @Autowired
     private HamburgueriaService hamburgueriaService;
 
     @GetMapping
-    public ResponseEntity<List<LancheResponseDTO>> listarTodosLanches() {
-        return ResponseEntity.ok(hamburgueriaService.listarTodosLanches());
+    public ResponseEntity<CardapioResponseDTO> obterCardapio() {
+        return ResponseEntity.ok(hamburgueriaService.obterCardapio());
     }
+
+    @GetMapping("/ingredientes")
+    public ResponseEntity<List<IngredienteResponseDTO>> obterTodosIngredientes() {
+        return ResponseEntity.ok(hamburgueriaService.obterTodosIngredientes());
+    }
+
 }

@@ -1,28 +1,69 @@
 package br.com.hamburgueria_dex_backend.repository;
 
-import br.com.hamburgueria_dex_backend.dto.LancheResponseDTO;
-import br.com.hamburgueria_dex_backend.entity.IngredientesEntity;
+import br.com.hamburgueria_dex_backend.entity.CardapioEntity;
+import br.com.hamburgueria_dex_backend.entity.IngredienteEntity;
+import br.com.hamburgueria_dex_backend.entity.LancheEntity;
+import br.com.hamburgueria_dex_backend.enums.Promocao;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Repository
 public class HamburgueriaRepository {
 
-    public List<LancheResponseDTO> listarTodosLanches () {
+    public CardapioEntity obterCardapio() {
 
-        List<IngredientesEntity> ingredientes = new ArrayList<>();
-        ingredientes.add(new IngredientesEntity("cebola", new BigDecimal("10.0")));
-        ingredientes.add(new IngredientesEntity("carne", new BigDecimal("50.0")));
-        ingredientes.add(new IngredientesEntity("bacon", new BigDecimal("50.0")));
+        List<IngredienteEntity> ingredientesXBacon = Arrays.asList(
+                new IngredienteEntity("Bacon", new BigDecimal("2.0")),
+                new IngredienteEntity("Hambúrguer de carne", new BigDecimal("3.0")),
+                new IngredienteEntity("Queijo", new BigDecimal("1.50"))
+        );
 
-        List<LancheResponseDTO> lancheResponse =new ArrayList<>();
+        List<IngredienteEntity> ingredientesXEgg = Arrays.asList(
+                new IngredienteEntity("Hambúrguer de carne", new BigDecimal("3.0")),
+                new IngredienteEntity("Ovo", new BigDecimal("0.80")),
+                new IngredienteEntity("Queijo", new BigDecimal("1.50"))
+        );
 
-        lancheResponse.add(new LancheResponseDTO("X-Bacon", ingredientes));
+        List<IngredienteEntity> ingredientesMisto = Arrays.asList(
+                new IngredienteEntity("Alface", new BigDecimal("0.40")),
+                new IngredienteEntity("Bacon", new BigDecimal("2.0")),
+                new IngredienteEntity("Hambúrguer de carne", new BigDecimal("3.0")),
+                new IngredienteEntity("Queijo", new BigDecimal("1.50"))
+        );
 
-        return lancheResponse;
+        List<IngredienteEntity> ingredientesXtudo = Arrays.asList(
+                new IngredienteEntity("Alface", new BigDecimal("0.40")),
+                new IngredienteEntity("Bacon", new BigDecimal("2.0")),
+                new IngredienteEntity("Hambúrguer de carne", new BigDecimal("3.0")),
+                new IngredienteEntity("Ovo", new BigDecimal("0.80")),
+                new IngredienteEntity("Queijo", new BigDecimal("1.50"))
+        );
 
+
+        List<LancheEntity> LancheEntity = Arrays.asList(
+                new LancheEntity("X-Bacon", Promocao.MUITA_CARNE, ingredientesXBacon),
+                new LancheEntity("X-Egg", Promocao.LIGHT, ingredientesXEgg),
+                new LancheEntity("Misto", Promocao.MUITO_QUEIJO, ingredientesMisto),
+                new LancheEntity("X-Tudo", Promocao.INFLACAO, ingredientesXtudo)
+        );
+
+        return new CardapioEntity(LancheEntity);
+
+    }
+
+    public List<IngredienteEntity> obterTodosIngredientes() {
+
+        List<IngredienteEntity> ingredientes = Arrays.asList(
+                new IngredienteEntity("Alface", new BigDecimal("0.40")),
+                new IngredienteEntity("Bacon", new BigDecimal("2.0")),
+                new IngredienteEntity("Hambúrguer de carne", new BigDecimal("3.0")),
+                new IngredienteEntity("Ovo", new BigDecimal("0.80")),
+                new IngredienteEntity("Queijo", new BigDecimal("1.50"))
+        );
+
+        return ingredientes;
     }
 }
