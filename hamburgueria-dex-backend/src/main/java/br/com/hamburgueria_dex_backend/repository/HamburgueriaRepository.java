@@ -90,7 +90,7 @@ public class HamburgueriaRepository {
             // Light se o Lanche tem alface e nao tem bacon -> desconto de 10%
             if ((ingredientes.stream().filter(i -> i.getNome().equals("Alface")).count() > 0)
                     && (ingredientes.stream().filter(i -> i.getNome().equals("Bacon")).count() == 0)) {
-                return Promocao.LIGHT.name();
+                return Promocao.MUITA_CARNE.name();
             }
 
             // Muita carne se o lanche tiver mais do que 3 porcoes de carne

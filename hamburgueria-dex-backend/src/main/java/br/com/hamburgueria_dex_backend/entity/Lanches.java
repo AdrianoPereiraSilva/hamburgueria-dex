@@ -20,6 +20,5 @@ public class Lanches {
         this.nome = nome;
         this.ingrediente = ingrediente;
         this.valor = BigDecimal.valueOf(this.ingrediente.stream().mapToInt(i -> i.getValor().intValue()).sum());
-        //this.promocao = calculaTipoPromocaoLanche(this.ingrediente);
     }
 }
