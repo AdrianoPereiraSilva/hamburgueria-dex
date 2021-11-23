@@ -1,15 +1,13 @@
 package br.com.hamburgueria_dex_backend.service.impl;
 
-import br.com.hamburgueria_dex_backend.dto.CardapioResponseDTO;
-import br.com.hamburgueria_dex_backend.dto.IngredienteResponseDTO;
-import br.com.hamburgueria_dex_backend.entity.IngredienteEntity;
+import br.com.hamburgueria_dex_backend.entity.Cardapio;
+import br.com.hamburgueria_dex_backend.entity.Ingredientes;
 import br.com.hamburgueria_dex_backend.repository.HamburgueriaRepository;
 import br.com.hamburgueria_dex_backend.service.HamburgueriaService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,11 +17,15 @@ public class HamburgueriaServiceImpl implements HamburgueriaService {
     @Autowired
     private HamburgueriaRepository repository;
 
-    public CardapioResponseDTO obterCardapio () {
-        return new CardapioResponseDTO(repository.obterCardapio().getLanches());
+    public Cardapio obterCardapio () {
+        return repository.obterCardapio();
     }
 
-    public List<IngredienteResponseDTO> obterTodosIngredientes() {
-        return IngredienteResponseDTO.entityListToDtoList(repository.obterTodosIngredientes());
+    public List<Ingredientes> obterTodosIngredientes() {
+        return repository.obterTodosIngredientes();
+    }
+
+    public Cardapio calcularValorTotalCardapio(Cardapio cardapio){
+        return repository.calcularValorTotalCardapio(cardapio);
     }
 }

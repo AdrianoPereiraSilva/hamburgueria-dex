@@ -4,5 +4,6 @@ public enum Promocao {
     LIGHT,
     MUITA_CARNE,
     MUITO_QUEIJO,
-    INFLACAO
+    INFLACAO,
+    SEM_PROMOCAO
 }
