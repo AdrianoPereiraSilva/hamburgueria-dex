@@ -1,9 +1,9 @@
 package br.com.hamburgueria_dex_backend.repository;
 
+import br.com.hamburgueria_dex_backend.business.*;
 import br.com.hamburgueria_dex_backend.entity.Cardapio;
 import br.com.hamburgueria_dex_backend.entity.Ingredientes;
 import br.com.hamburgueria_dex_backend.entity.Lanches;
-import br.com.hamburgueria_dex_backend.enums.Promocao;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
@@ -75,38 +75,13 @@ public class HamburgueriaRepository {
 
     public Cardapio calcularValorTotalCardapio(Cardapio cardapio) {
 
-        for (Lanches lanche : cardapio.getLanches()) {
-            lanche.setPromocao(calculaTipoPromocaoLanche(lanche.getIngrediente()));
-        }
+        CalcularDescontoLanches cardapioResponse =
+                new LancheLight(
+                    new LancheMuitaCarne(
+                        new LancheMuitoQueijo(
+                                new LancheSemDesconto())));
 
-        Cardapio cardapioRetorno = new Cardapio(cardapio.getLanches());
-
-        return cardapioRetorno;
-    }
-
-    private String calculaTipoPromocaoLanche(List<Ingredientes> ingredientes) {
-
-        for (Ingredientes ingrediente : ingredientes) {
-            // Light se o Lanche tem alface e nao tem bacon -> desconto de 10%
-            if ((ingredientes.stream().filter(i -> i.getNome().equals("Alface")).count() > 0)
-                    && (ingredientes.stream().filter(i -> i.getNome().equals("Bacon")).count() == 0)) {
-                return Promocao.MUITA_CARNE.name();
-            }
-
-            // Muita carne se o lanche tiver mais do que 3 porcoes de carne
-            // A cada 3 porções o cliente só paga 2. Se o lanche tiver 6 porções, o cliente pagará 4. Assim por diante
-            if (ingrediente.getNome().equals("Bacon") && ingrediente.getQuantidade().compareTo(new BigDecimal("3")) >= 0) {
-                return Promocao.MUITA_CARNE.name();
-            }
-
-            // Muito queijo se o lanche tiver mais do que 3 porcoes de queijo
-            // A cada 3 porções o cliente só paga 2. Se o lanche tiver 6 porções, o cliente pagará 4. Assim por diante.
-            if (ingrediente.getNome().equals("Queijo") && ingrediente.getQuantidade().compareTo(new BigDecimal("3")) >= 0) {
-                return Promocao.MUITO_QUEIJO.name();
-            }
-
-        }
-        return Promocao.SEM_PROMOCAO.name();
+        return new Cardapio(cardapioResponse.calcular(cardapio).getLanches());
     }
 
 }

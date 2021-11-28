@@ -16,7 +16,9 @@ public class Cardapio {
 
     public Cardapio(List<Lanches> lanches) {
         this.lanches = lanches;
-        this.valor = BigDecimal.valueOf(lanches.stream().mapToInt(i -> i.getValor().intValue()).sum());
+
+        // Usa-se .reduce do Stream para Somar todos os valores do tipo BigDecimal
+        this.valor = lanches.stream().map(i -> i.getValor()).reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
 }

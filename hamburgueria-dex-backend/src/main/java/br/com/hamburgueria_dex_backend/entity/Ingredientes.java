@@ -11,11 +11,13 @@ public class Ingredientes {
 
     private String nome;
     private BigDecimal quantidade;
-    private BigDecimal valor;
+    private BigDecimal valorTotal;
+    private BigDecimal valorUnitario;
 
     public Ingredientes(String nome, BigDecimal quantidade, BigDecimal valor) {
         this.nome = nome;
         this.quantidade = quantidade;
-        this.valor = valor.multiply(quantidade);
+        this.valorTotal = valor.multiply(quantidade);
+        this.valorUnitario = valor;
     }
 }

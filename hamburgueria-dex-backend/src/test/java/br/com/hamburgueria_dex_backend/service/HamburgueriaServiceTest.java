@@ -72,7 +72,7 @@ public class HamburgueriaServiceTest {
         );
 
         List<Lanches> lanches = Arrays.asList(
-                new Lanches("X-Salada", ingredientesXBacon)
+                new Lanches("X-Bacon", ingredientesXBacon)
         );
 
         Lanches lancheExpected = new Lanches("X-Bacon", ingredientesXBacon);

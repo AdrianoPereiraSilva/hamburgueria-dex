@@ -13,12 +13,15 @@ public class Lanches {
 
     private String nome;
     private BigDecimal valor;
+    private BigDecimal valorAntigo;
     private String promocao;
-    private List<Ingredientes> ingrediente;
+    private List<Ingredientes> ingredientes;
 
-    public Lanches(String nome, List<Ingredientes> ingrediente) {
+    public Lanches(String nome, List<Ingredientes> ingredientes) {
         this.nome = nome;
-        this.ingrediente = ingrediente;
-        this.valor = BigDecimal.valueOf(this.ingrediente.stream().mapToInt(i -> i.getValor().intValue()).sum());
+        this.ingredientes = ingredientes;
+
+        // Usa-se .reduce do Stream para Somar todos os valores do tipo BigDecimal
+        this.valor = this.ingredientes.stream().map(i -> i.getValorTotal()).reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 }
